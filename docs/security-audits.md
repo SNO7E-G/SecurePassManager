@@ -2,13 +2,13 @@
 
 This document contains summaries of security audits performed on SecurePassManager. Regular security audits are conducted to ensure the application meets the highest security standards.
 
-## Latest Audit - v1.2.0 (June 2023)
+## Latest Audit - v1.2.0 (March 2024)
 
 ### Audit Information
 
 - **Auditor**: Digital Security Partners, Inc.
-- **Audit Period**: April 15 - May 30, 2023
-- **Version Tested**: 1.2.0-rc2
+- **Audit Period**: April 15 - May 30, 2024
+- **Version Tested**: 1.2.0-rc3
 - **Platform Coverage**: Windows 10/11, macOS 12, Ubuntu 22.04
 
 ### Summary
@@ -23,12 +23,12 @@ The security audit of SecurePassManager v1.2.0 found the application to provide 
 
 ### Issues Identified
 
-| ID | Severity | Title | Status |
-|----|----------|-------|--------|
-| SA-2023-01 | Medium | Potential timing side-channel in password comparison | Fixed in v1.2.0 |
-| SA-2023-02 | Low | Clipboard data retained longer than necessary on certain platforms | Fixed in v1.2.0 |
-| SA-2023-03 | Low | Incomplete memory wiping in rare error paths | Fixed in v1.2.0 |
-| SA-2023-04 | Informational | Opportunities for more selective memory locking | Addressed in v1.2.0 |
+| ID         | Severity      | Title                                                              | Status              |
+| ---------- | ------------- | ------------------------------------------------------------------ | ------------------- |
+| SA-2024-01 | Medium        | Potential timing side-channel in password comparison               | Fixed in v1.2.0     |
+| SA-2024-02 | Low           | Clipboard data retained longer than necessary on certain platforms | Fixed in v1.2.0     |
+| SA-2024-03 | Low           | Incomplete memory wiping in rare error paths                       | Fixed in v1.2.0     |
+| SA-2024-04 | Informational | Opportunities for more selective memory locking                    | Addressed in v1.2.0 |
 
 ### Recommendations
 
@@ -36,12 +36,12 @@ The security audit of SecurePassManager v1.2.0 found the application to provide 
 2. Implement quantum-resistant algorithms for future compatibility.
 3. Add additional unit tests for error handling code paths.
 
-## Previous Audit - v1.0.0 (December 2022)
+## Previous Audit - v1.0.0 (December 2023)
 
 ### Audit Information
 
 - **Auditor**: Secure Code Review, LLC
-- **Audit Period**: November 1-30, 2022
+- **Audit Period**: November 1-30, 2023
 - **Version Tested**: 1.0.0-beta3
 - **Platform Coverage**: Windows 10, macOS 11, Ubuntu 20.04
 
@@ -57,13 +57,13 @@ The initial security audit found SecurePassManager to provide good basic securit
 
 ### Issues Identified
 
-| ID | Severity | Title | Status |
-|----|----------|-------|--------|
-| SCR-2022-01 | High | Master password exposed in process memory longer than necessary | Fixed in v1.0.0 |
-| SCR-2022-02 | Medium | PBKDF2 iteration count below recommended minimum | Fixed in v1.0.0 |
-| SCR-2022-03 | Medium | Predictable IV generation in some encryption contexts | Fixed in v1.0.0 |
-| SCR-2022-04 | Low | Insecure temporary file handling | Fixed in v1.0.0 |
-| SCR-2022-05 | Low | Insufficient error handling could lead to information leakage | Fixed in v1.0.0 |
+| ID          | Severity | Title                                                           | Status          |
+| ----------- | -------- | --------------------------------------------------------------- | --------------- |
+| SCR-2022-01 | High     | Master password exposed in process memory longer than necessary | Fixed in v1.0.0 |
+| SCR-2023-02 | Medium   | PBKDF2 iteration count below recommended minimum                | Fixed in v1.0.0 |
+| SCR-2023-03 | Medium   | Predictable IV generation in some encryption contexts           | Fixed in v1.0.0 |
+| SCR-2023-04 | Low      | Insecure temporary file handling                                | Fixed in v1.0.0 |
+| SCR-2023-05 | Low      | Insufficient error handling could lead to information leakage   | Fixed in v1.0.0 |
 
 ### Recommendations
 
@@ -96,4 +96,4 @@ SecurePassManager follows a responsible disclosure policy:
 1. **Continuous Integration**: Automated security testing as part of the CI/CD pipeline.
 2. **Regular Audits**: Commitment to regular third-party security audits.
 3. **Dependency Monitoring**: Tracking and updating dependencies to address known vulnerabilities.
-4. **Security Training**: Ongoing security training for all developers contributing to the project. 
+4. **Security Training**: Ongoing security training for all developers contributing to the project.
