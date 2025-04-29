@@ -7,7 +7,7 @@ Security is the primary focus of SecurePassManager. This document outlines our s
 We take security vulnerabilities very seriously. If you discover a security issue, please follow these steps for responsible disclosure:
 
 1. **Do not disclose the vulnerability publicly**
-2. **Email the details to security@example.com** or use GitHub's Security Advisory feature
+2. **Use GitHub's Security Advisory feature** to report the issue privately
 3. **Include detailed information** about the vulnerability and steps to reproduce
 4. **Wait for confirmation** before disclosing publicly
 
@@ -31,6 +31,7 @@ The master password is the foundation of security for your vault. It is:
 We use industry-standard key derivation functions to transform your master password into encryption keys:
 
 - **Argon2id** (default): Winner of the Password Hashing Competition, designed to be resistant to both GPU and ASIC attacks. Parameters are configurable:
+
   - Memory: Default 64MB (configurable up to 1GB)
   - Iterations: Default 3 (configurable up to 10)
   - Parallelism: Default 4 (configurable)
@@ -145,12 +146,14 @@ We are continuously improving our security measures:
 For technical users, here are the specific cryptographic implementation details:
 
 ### AES-256-GCM Implementation
+
 - **Key**: 256-bit derived from master password
 - **IV/Nonce**: 12 bytes (96 bits) randomly generated for each encryption operation
-- **Authentication Tag**: 16 bytes (128 bits) 
+- **Authentication Tag**: 16 bytes (128 bits)
 - **Additional Data**: The entry ID and type are used as additional authenticated data
 
 ### Argon2id Implementation
+
 - **Salt**: 16 bytes (128 bits) randomly generated
 - **Memory**: Default 65536 KiB (64 MiB)
 - **Iterations**: Default 3 passes
@@ -158,6 +161,7 @@ For technical users, here are the specific cryptographic implementation details:
 - **Output**: 32 bytes (256 bits) key
 
 ### Password Storage
+
 1. Master password → Argon2id → Master Key
 2. Each entry encrypted using AES-256-GCM with unique IV
 3. Authentication tag stored alongside ciphertext
@@ -181,4 +185,4 @@ For more details:
 - [Cryptographic Design Document](docs/crypto-design.md)
 - [Threat Model](docs/threat-model.md)
 - [Security Audit Reports](docs/security-audits.md)
-- [FAQ on Security](docs/security-faq.md) 
+- [FAQ on Security](docs/security-faq.md)
