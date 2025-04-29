@@ -1,7 +1,5 @@
 # SecurePassManager
 
-![SecurePassManager Logo](docs/assets/logo.png)
-
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-1.2.0-green.svg)](#)
 [![C++](https://img.shields.io/badge/C++-17-blue.svg)](#)
@@ -12,22 +10,26 @@
 ## Key Features
 
 🔒 **Military-Grade Encryption**
+
 - AES-256-GCM encryption with authenticated ciphers
 - Argon2id key derivation (winner of the Password Hashing Competition)
 - ChaCha20-Poly1305 support for alternative encryption
 
 🛡️ **Advanced Security Measures**
+
 - Memory protection against cold boot attacks
 - Anti-forensic techniques for sensitive data
 - Configurable password policies and breach detection
 - Optional hardware security module (HSM) integration
 
 ⚡ **Optimized Performance**
+
 - Lightweight CLI interface with minimal dependencies
 - Hardware acceleration where available (AES-NI)
 - Fast database operations with SQLite
 
 🔄 **Convenient Workflow**
+
 - Strong password generator with various options
 - Password strength analysis and improvement suggestions
 - Secure import/export capabilities
@@ -36,6 +38,7 @@
 ## Installation
 
 ### Prerequisites
+
 - CMake (3.15+)
 - Modern C++ compiler supporting C++17
 - OpenSSL (1.1.1+)
@@ -146,4 +149,4 @@ SecurePassManager leverages several excellent open-source libraries:
 ## Contact
 
 - Project maintained by [Mahmoud Ashraf (SNO7E)](https://github.com/SNO7E)
-- Report bugs and issues on the [Issue Tracker](https://github.com/SNO7E/SecurePassManager/issues) 
+- Report bugs and issues on the [Issue Tracker](https://github.com/SNO7E/SecurePassManager/issues)
