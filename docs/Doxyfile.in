@@ -1,0 +1,116 @@
+# Doxyfile 1.9.1
+
+# Project settings
+PROJECT_NAME           = "SecurePassManager"
+PROJECT_NUMBER         = @PROJECT_VERSION@
+PROJECT_BRIEF          = "High-security CLI password management with modern cryptography"
+PROJECT_LOGO           = "@CMAKE_CURRENT_SOURCE_DIR@/docs/assets/logo.png"
+OUTPUT_DIRECTORY       = "@CMAKE_CURRENT_BINARY_DIR@/docs"
+
+# Enable Markdown support
+MARKDOWN_SUPPORT       = YES
+USE_MDFILE_AS_MAINPAGE = "@CMAKE_CURRENT_SOURCE_DIR@/README.md"
+
+# Build related options
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_PACKAGE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_ANON_NSPACES   = YES
+
+# Warning options
+QUIET                  = YES
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
+
+# Input/output options
+INPUT                  = "@CMAKE_CURRENT_SOURCE_DIR@/src" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/include" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/README.md" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/SECURITY.md" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/CONTRIBUTING.md" \
+                         "@CMAKE_CURRENT_SOURCE_DIR@/docs"
+FILE_PATTERNS          = *.cpp \
+                         *.h \
+                         *.hpp \
+                         *.md
+RECURSIVE              = YES
+EXCLUDE_PATTERNS       = */build/* \
+                         */test/* \
+                         */third_party/* \
+                         */docs/assets/*
+IMAGE_PATH             = "@CMAKE_CURRENT_SOURCE_DIR@/docs/assets"
+EXAMPLE_PATH           = "@CMAKE_CURRENT_SOURCE_DIR@/docs/examples"
+USE_MATHJAX            = YES
+
+# HTML output options
+GENERATE_HTML          = YES
+HTML_OUTPUT            = "html"
+HTML_FILE_EXTENSION    = .html
+HTML_COLORSTYLE_HUE    = 220
+HTML_COLORSTYLE_SAT    = 100
+HTML_COLORSTYLE_GAMMA  = 80
+HTML_TIMESTAMP         = YES
+HTML_DYNAMIC_SECTIONS  = YES
+GENERATE_TREEVIEW      = YES
+SEARCHENGINE           = YES
+SERVER_BASED_SEARCH    = NO
+
+# LaTeX output options
+GENERATE_LATEX         = NO
+
+# RTF output options
+GENERATE_RTF           = NO
+
+# XML output options
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+
+# Preprocessing options
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+INCLUDE_PATH           = "@CMAKE_CURRENT_SOURCE_DIR@/include"
+
+# External references
+TAGFILES               = 
+GENERATE_TAGFILE       = "@CMAKE_CURRENT_BINARY_DIR@/docs/securepassmanager.tag"
+ALLEXTERNALS           = NO
+
+# Dot tool options
+HAVE_DOT               = YES
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+UML_LOOK               = YES
+UML_LIMIT_NUM_FIELDS   = 50
+DOT_GRAPH_MAX_NODES    = 100
+MAX_DOT_GRAPH_DEPTH    = 0
+DOT_TRANSPARENT        = YES
+DOT_MULTI_TARGETS      = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
+# Diagram options
+HIDE_UNDOC_RELATIONS   = NO
+TEMPLATE_RELATIONS     = YES
+DIRECTORY_GRAPH        = YES
+
+# Legend options
+GENERATE_LEGEND        = YES
+
+# Other features
+GENERATE_TODOLIST      = YES
+GENERATE_TESTLIST      = YES
+GENERATE_BUGLIST       = YES
+GENERATE_DEPRECATEDLIST= YES
+SHOW_USED_FILES        = YES
+SHOW_FILES             = YES
+SHOW_NAMESPACES        = YES
+CITE_BIB_FILES         = 
+LAYOUT_FILE            = 
+EXCLUDE_SYMBOLS        = 

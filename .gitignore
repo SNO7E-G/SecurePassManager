@@ -1,0 +1,182 @@
+# Build directories
+build/
+out/
+bin/
+lib/
+Release/
+Debug/
+x64/
+Win32/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# IDE files
+.vscode/
+.idea/
+.vs/
+*.swp
+*.swo
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.vcxproj.user
+*.vcproj.*.user
+*.ncb
+*.aps
+*.idb
+*.pdb
+ipch/
+.cache/
+
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.obj
+
+# Generated files
+generated/
+Generated/
+GeneratedFiles/
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# Database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Password vault files
+*.vault
+*.spv
+*.kdbx
+
+# Logs
+*.log
+log/
+logs/
+
+# Backup files
+*.bak
+*.backup
+*~
+.*.swp
+.~lock.*
+
+# Secrets and keys
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.der
+*.crt
+*.cer
+*.priv
+*.pub
+
+# Test files
+Testing/
+CTest/
+GoogleTest/
+testdata/
+
+# Dependency directories
+vcpkg/
+conan/
+packages/
+third_party/build/
+
+# Documentation
+docs/html/
+docs/latex/
+docs/xml/
+docs/man/
+docs/coverage/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Package files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
+*.deb
+*.rpm
+
+# Temporary files
+.tmp/
+temp/
+tmp/
+*.tmp
+
+# Coverage reports
+coverage/
+*.gcov
+*.gcda
+*.gcno
+coverage.xml
+coverage.info
+
+# Profiling data
+*.prof
+gmon.out
+callgrind.out*
+perf.data*
+profile/
+
+# Core dumps
+core
+core.*
+vgcore.*
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Editor files
+*.swp
+*~
+*.sublime-*
+
+# OS specific files
+desktop.ini
+
+# Dependencies
+/external/
+
+# Generated files
+/doc/doxygen/
+
+# Personal configuration
+config.ini 

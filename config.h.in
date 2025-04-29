@@ -1,0 +1,79 @@
+#pragma once
+
+// Version information
+#define SECUREPASS_VERSION_MAJOR @PROJECT_VERSION_MAJOR @
+#define SECUREPASS_VERSION_MINOR @PROJECT_VERSION_MINOR @
+#define SECUREPASS_VERSION_PATCH @PROJECT_VERSION_PATCH @
+#define SECUREPASS_VERSION "@PROJECT_VERSION@"
+#define SECUREPASS_AUTHOR "Mahmoud Ashraf (SNO7E)"
+
+// Platform detection - will be replaced by CMake during configuration
+#define IS_WINDOWS @IS_WINDOWS @
+#define IS_MACOS @IS_MACOS @
+#define IS_IOS @IS_IOS @
+#define IS_ANDROID @IS_ANDROID @
+#define IS_LINUX @IS_LINUX @
+#define IS_RASPBERRY_PI @IS_RASPBERRY_PI @
+
+// Feature detection - will be replaced by CMake during configuration
+#define Argon2_FOUND @Argon2_FOUND @
+#define Botan_FOUND @Botan_FOUND @
+#define libsodium_FOUND @libsodium_FOUND @
+
+// Optional features - will be replaced by CMake during configuration
+#define HAVE_QT @HAVE_QT @
+#define HAVE_MOBILE_SUPPORT @HAVE_MOBILE_SUPPORT @
+#define HAVE_HSM @HAVE_HSM @
+#define HAVE_CLOUD_SYNC @HAVE_CLOUD_SYNC @
+#define HAVE_YUBIKEY @HAVE_YUBIKEY @
+
+// Biometric options - will be replaced by CMake during configuration
+#define HAVE_WINDOWS_BIOMETRIC_FRAMEWORK @HAVE_WINDOWS_BIOMETRIC_FRAMEWORK @
+#define HAVE_TOUCH_ID @HAVE_TOUCH_ID @
+#define HAVE_ANDROID_BIOMETRICS @HAVE_ANDROID_BIOMETRICS @
+
+// Specify encryption algorithms that are available
+#if Botan_FOUND
+#define HAVE_TWOFISH 1
+#define HAVE_SERPENT 1
+#else
+#define HAVE_TWOFISH 0
+#define HAVE_SERPENT 0
+#endif
+
+// ChaCha20-Poly1305 is part of modern OpenSSL
+#define HAVE_CHACHA20_POLY1305 1
+
+// Libsodium provides XChaCha20-Poly1305
+#if libsodium_FOUND
+#define HAVE_XCHACHA20_POLY1305 1
+#else
+#define HAVE_XCHACHA20_POLY1305 0
+#endif
+
+// Default configuration values
+#define DEFAULT_PBKDF2_ITERATIONS 310000
+#define DEFAULT_ARGON2_ITERATIONS 3
+#define DEFAULT_ARGON2_MEMORY 65536
+#define DEFAULT_ARGON2_PARALLELISM 4
+
+// Default application settings
+#define DEFAULT_AUTO_LOCK_TIMEOUT 300
+#define DEFAULT_PASSWORD_LENGTH 20
+#define DEFAULT_PASSPHRASE_WORDS 5
+#define DEFAULT_BACKUP_COUNT 10
+
+// Device-specific settings
+#if IS_ANDROID || IS_IOS
+#define DEFAULT_UI_SCALE 1.5
+#define DEFAULT_FONT_SIZE 16
+#define DEFAULT_TOUCH_TARGETS 1
+#elif IS_RASPBERRY_PI
+#define DEFAULT_UI_SCALE 1.2
+#define DEFAULT_FONT_SIZE 14
+#define DEFAULT_TOUCH_TARGETS 0
+#else
+#define DEFAULT_UI_SCALE 1.0
+#define DEFAULT_FONT_SIZE 12
+#define DEFAULT_TOUCH_TARGETS 0
+#endif

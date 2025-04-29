@@ -1,0 +1,151 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-artifacts:
+    name: Build ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+            name: "Windows",
+            os: windows-latest,
+            build_type: "Release",
+            cc: "cl",
+            cxx: "cl",
+            generators: "Visual Studio 17 2022",
+            package_generator: "ZIP",
+            artifact_name: "securepass-windows-x64"
+          }
+          - {
+            name: "Ubuntu",
+            os: ubuntu-latest,
+            build_type: "Release",
+            cc: "gcc",
+            cxx: "g++",
+            generators: "Ninja",
+            package_generator: "TGZ",
+            artifact_name: "securepass-linux-x64"
+          }
+          - {
+            name: "macOS",
+            os: macos-latest,
+            build_type: "Release",
+            cc: "clang",
+            cxx: "clang++",
+            generators: "Ninja",
+            package_generator: "TGZ",
+            artifact_name: "securepass-macos-x64"
+          }
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies (Ubuntu)
+        if: startsWith(matrix.config.os, 'ubuntu')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libssl-dev libsqlite3-dev
+
+      - name: Install dependencies (macOS)
+        if: startsWith(matrix.config.os, 'macos')
+        run: |
+          brew install ninja openssl sqlite3
+
+      - name: Install dependencies (Windows)
+        if: startsWith(matrix.config.os, 'windows')
+        run: |
+          choco install ninja openssl sqlite
+
+      - name: Configure CMake
+        shell: bash
+        env:
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. -G "${{ matrix.config.generators }}" \
+                 -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
+                 -DBUILD_TESTING=OFF \
+                 -DCPACK_GENERATOR=${{ matrix.config.package_generator }}
+
+      - name: Build
+        shell: bash
+        run: |
+          cd build
+          cmake --build . --config ${{ matrix.config.build_type }}
+
+      - name: Package
+        shell: bash
+        run: |
+          cd build
+          cpack -G ${{ matrix.config.package_generator }} -C ${{ matrix.config.build_type }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.config.artifact_name }}
+          path: build/securepass-*.zip
+          if-no-files-found: error
+
+  create-release:
+    name: Create Release
+    needs: build-artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          body_path: CHANGELOG.md
+
+      - name: Upload Windows Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts/securepass-windows-x64/securepass-*.zip
+          asset_name: securepass-windows-x64.zip
+          asset_content_type: application/zip
+
+      - name: Upload Linux Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts/securepass-linux-x64/securepass-*.tar.gz
+          asset_name: securepass-linux-x64.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Upload macOS Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts/securepass-macos-x64/securepass-*.tar.gz
+          asset_name: securepass-macos-x64.tar.gz
+          asset_content_type: application/gzip 
